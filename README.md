@@ -12,7 +12,7 @@ This repository is my own custom [bootc](https://github.com/bootc-dev/bootc) ima
 - /games
 
 ## Tools
-- Screenprofilerswap/Screenprofilerback
+- [Screenprofilerswap/Screenprofilerback](https://github.com/kohega/screenprofilerswap)
 - EDID file with Steam Deck@60/90hz, iPad 10th gen, 1440p120 and 16:10 resolutions support for Sunshine. (Missing 4K and HDR)
   
 ## Theme
