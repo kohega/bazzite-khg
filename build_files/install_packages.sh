@@ -63,11 +63,8 @@ LAYERED_PACKAGES=(
     python-pyv4l2
     opencv
     opencv-devel
-    opencv-python
     v4l-utils
-    mscorefonts2
     xorg-x11-font-utils
-    fontconfig
     gamemode
 )
 dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
