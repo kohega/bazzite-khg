@@ -65,12 +65,17 @@ LAYERED_PACKAGES=(
     opencv-devel
     opencv-python
     v4l-utils
+    mscorefonts2
+    xorg-x11-font-utils
+    fontconfig
 )
 dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
 
 # Merkuro Calendar
 dnf5 install --setopt=install_weak_deps=True --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y merkuro kdepim-runtime kdepim-addons akonadi
-    
+
+# Microsoft fonts    
+rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
 log "Disable Copr repos as we do not need it anymore"
 

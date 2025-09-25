@@ -124,8 +124,8 @@ howdy-setup:
   sudo cp /etc/pam.d/sudo /etc/pam.d/sudo.bak
   sudo cp /etc/pam.d/kde /etc/pam.d/kde.bak
   sudo sed -i '2i\auth       sufficient   pam_howdy.so no_confirmation' /etc/pam.d/sudo  
-  sudo sed -i '2i\auth       sufficient   pam_howdy.so no_confirmation' /etc/pam.d/sddm
-  sudo sed -i '2i\auth       sufficient   pam_howdy.so no_confirmation' /etc/pam.d/kde
+  sudo sed -i '2i\auth       sufficient   pam_howdy.so' /etc/pam.d/system_auth
+  sudo sed -i '2i\auth       sufficient   pam_howdy.so' /etc/pam.d/kde
   sudo chmod o+rw /dev/video*
   sudo chmod 666 /dev/video*
   sudo chmod 755 /usr/lib64/security/pam_howdy.so
@@ -133,26 +133,5 @@ howdy-setup:
   sudo checkmodule -M -m -o /etc/howdy/howdy.mod /etc/howdy/howdy.te
   sudo semodule_package -o /etc/howdy/howdy.pp -m /etc/howdy/howdy.mod
   sudo semodule -i /etc/howdy/howdy.pp
-  PAM_FILES=(
-  /etc/pam.d/sudo
-  /etc/pam.d/gdm-password
-  /etc/pam.d/gdm-fingerprint
-  /etc/pam.d/login
-  /etc/pam.d/system-auth
-  /etc/pam.d/password-auth
-  /etc/pam.d/su
-)
-
-for pam_file in "${PAM_FILES[@]}"; do
-  if [[ -f "$pam_file" ]]; then
-    if ! grep -q "pam_howdy.so" "$pam_file"; then
-      echo "📌 Inserting into $pam_file"
-      sudo sed -i '1i auth sufficient pam_howdy.so' "$pam_file"
-    else
-      echo "✅ Already present in $pam_file"
-    fi
-  else
-    echo "⚠️  PAM file $pam_file not found — skipping"
-  fi
   sudo howdy add
   sudo howdy test
