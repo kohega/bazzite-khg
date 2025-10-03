@@ -11,21 +11,24 @@ This repository is my own custom [bootc](https://github.com/bootc-dev/bootc) ima
 - /videos
 - /games
 
-## RPM
-- Eddie-UI (AirVPN)
-- epson-inkjet-printer-escpr (printer driver)
-- NAPS2 (for scanning)
-- kvantum
+## Tools
+- [Screenprofilerswap/Screenprofilerback](https://github.com/kohega/screenprofilerswap)
+- EDID file with Steam Deck@60/90hz, iPad 10th gen, 1440p120 and 16:10 resolutions support for Sunshine. (Missing 4K and HDR)
+  
+## Theme
+
+[Monochrome KDE theme](https://gitlab.com/pwyde/monochrome-kde)
 
 ## Layered
 
 ### Productivity and Utilities
 | Application  | Description                                                      |
 |--------------|------------------------------------------------------------------|
-| BleachBit    | System cleaner to free space and protect privacy.              |
-| Lact         | Tool to manage keyboard shortcuts on Linux.                     |
-
----
+| BleachBit    | System cleaner to free space and protect privacy.                |
+| Lact         | Tool to manage keyboard shortcuts on Linux.                      |
+| merkuro      | Calendar application for KDE.                                   |
+| NAPS2                     | Tool for scanning documents.                                     |
+| epson-inkjet-printer-escpr| Printer driver for Epson inkjet printers.                        |
 
 ### Internet and Network
 | Application       | Description                                                      |
@@ -33,60 +36,62 @@ This repository is my own custom [bootc](https://github.com/bootc-dev/bootc) ima
 | Discord           | Voice and text messaging app for communities.                   |
 | FileZilla         | FTP, FTPS, and SFTP client for file transfers.                  |
 | Firefox           | Open-source web browser.                                         |
-| Firefox-langpacks | Language packs for Firefox.                                     |
 | qBittorrent       | Open-source BitTorrent client.                                  |
 | Syncthing         | Decentralized file synchronization tool.                        |
-
----
+| Eddie-UI          | AirVPN client.                                                  |
+| zerotier-one      | Tool for creating virtual networks.                             |
 
 ### Multimedia
 | Application               | Description                                                      |
 |----------------------------|------------------------------------------------------------------|
 | Audacity                   | Open-source audio editor.                                        |
-| Haruna                     | Video player for KDE.                                            |
 | Heroic Games Launcher (bin)| Game launcher for Epic Games and GOG on Linux.                   |
 | Kodi                       | Media center for organizing and playing movies, music, etc.     |
 | kodi-inputstream-adaptive  | Kodi plugin for adaptive streaming playback.                    |
-
----
+| Flex-Launcher  | 10-foot HTPC application launcher.                    |
 
 ### Development and Libraries
-| Application  | Description                                                      |
-|--------------|------------------------------------------------------------------|
-| gh           | Command-line tool to interact with GitHub.                       |
-| inih         | Library for parsing INI files.                                  |
-| SDL2_image   | Library for loading images (PNG, JPEG, etc.) with SDL2.         |
-| SDL2_ttf     | Library for rendering TrueType fonts with SDL2.                 |
+ | Application               | Description                                                      |
+ |---------------------------|------------------------------------------------------------------|
+ | gh                        | Command-line tool to interact with GitHub.                       |
+ | inih                      | Library for parsing INI files.                                  |
+ | SDL2_ttf                  | Library for rendering TrueType fonts with SDL2.                 |
+ | SDL2_image                | Library for loading images (PNG, JPEG, etc.) with SDL2.         |
+ | python-elevate            | Python library for elevating privileges.                        |
+ | python-keyboard           | Python library for keyboard control.                            |
+ | python-pyv4l2             | Python bindings for Video4Linux2.                                |
+ | opencv                    | Open-source computer vision library.                            |
+ | opencv-devel              | Development files for OpenCV.                                   |
+ | v4l-utils                 | Video4Linux utilities.                                           |
 
----
 
 ### Virtualization and System Administration
-| Application      | Description                                                      |
-|------------------|------------------------------------------------------------------|
-| CoolerControl    | Tool to control fans and PC cooling.                             |
-| Virt-Manager     | Graphical interface for managing virtual machines (KVM/QEMU).   |
-
----
+ | Application               | Description                                                      |
+ |---------------------------|------------------------------------------------------------------|
+ | virt-manager              | Graphical interface for managing virtual machines (KVM/QEMU).   |
+ | coolercontrold            | Tool to control fans and PC cooling.                             |
+ | gamemode                  | Tool to optimize system performance for games.                  |
 
 ### System and Terminal Tools
-| Application  | Description                                                      |
-|--------------|------------------------------------------------------------------|
-| aria2c       | Command-line tool for downloading files (HTTP, FTP, etc.).      |
-| scrcpy       | Tool to control an Android device from a PC.                    |
-
----
+ | Application               | Description                                                      |
+ |---------------------------|------------------------------------------------------------------|
+ | aria2c                    | Command-line tool for downloading files (HTTP, FTP, etc.).      |
+ | scrcpy                    | Tool to control an Android device from a PC.                    |
+ | howdy                     | Tool for facial recognition.                                    |
+ | msttcore-fonts-installer  | Microsoft core fonts installer.                                  |
 
 ### KDE Applications
-| Application  | Description                                                      |
-|--------------|------------------------------------------------------------------|
-| Kate         | Advanced text editor for KDE.                                    |
-| KCalc        | Scientific calculator for KDE.                                  |
-| Konsole      | Terminal emulator for KDE.                                      |
-| KGet         | Download manager for KDE.                                        |
-| KRename      | Batch file renaming tool.                                        |
-| Gwenview     | Image viewer for KDE.                                            |
-| Okular       | Universal document viewer (PDF, EPUB, images, etc.).            |
-
+ | Application               | Description                                                      |
+ |---------------------------|------------------------------------------------------------------|
+ | kcalc                     | Scientific calculator for KDE.                                  |
+ | konsole                   | Terminal emulator for KDE.                                      |
+ | kate                      | Advanced text editor for KDE.                                    |
+ | krename                   | Batch file renaming tool.                                        |
+ | okular                    | Universal document viewer (PDF, EPUB, images, etc.).            |
+ | gwenview                  | Image viewer for KDE.                                            |
+ | ark                       | Archiving tool for KDE.                                          |
+ | kget                      | Download manager for KDE.                                        |
+ | kvantum                   | Tool for customizing Qt application styles.                     |
 
 # Community
 
