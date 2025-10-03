@@ -66,6 +66,8 @@ LAYERED_PACKAGES=(
     v4l-utils
     xorg-x11-font-utils
     gamemode
+    libheif
+    kimageformats
 )
 dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
 
