@@ -8,6 +8,9 @@ log() {
   echo "=== $* ==="
 }
 
+dnf5 install http://10.147.20.48:8080/api/public/dl/_bkwymvR
+#wget http://10.147.20.48:8080/api/public/dl/_bkwymvR
+ 
 log "Enable Copr repos"
 
 
