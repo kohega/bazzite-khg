@@ -7,10 +7,14 @@ trap '[[ $BASH_COMMAND != echo* ]] && [[ $BASH_COMMAND != log* ]] && echo "+ $BA
 log() {
   echo "=== $* ==="
 }
+log "Installing RPM packages"
+# Install RPMs
+for rpm_file in ctx/rpm/*.rpm; do
+    if [ -f "$rpm_file" ]; then
+        dnf5 install -y "$rpm_file"
+    fi
+done
 
-dnf5 install http://10.147.20.48:8080/api/public/dl/_bkwymvR
-#wget http://10.147.20.48:8080/api/public/dl/_bkwymvR
- 
 log "Enable Copr repos"
 
 
@@ -84,15 +88,6 @@ log "Disable Copr repos as we do not need it anymore"
 
 for repo in "${COPR_REPOS[@]}"; do
     dnf5 -y copr disable "$repo"
-done
-
-log "Installing RPM packages"
-
-# Install RPMs
-for rpm_file in ctx/rpm/*.rpm; do
-    if [ -f "$rpm_file" ]; then
-        dnf5 install -y "$rpm_file"
-    fi
 done
 
 log "Installing ZeroTier"
