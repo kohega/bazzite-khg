@@ -10,7 +10,7 @@ log() {
 log "Installing RPM packages"
 # Install Citrix
 cd /ctx/rpm
-wget https://media.githubusercontent.com/media/kohega/bazzite-khg/refs/heads/main/build_files/rpm/ICAClient-rhel-25.08.0.88-0.x86_64.rpm
+wget https://media.githubusercontent.com/media/kohega/bazzite-khg/refs/heads/main/build_files/ICAClient-rhel-25.08.0.88-0.x86_64.rpm
 cd /
 
 # Install RPMs
