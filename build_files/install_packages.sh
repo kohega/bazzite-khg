@@ -8,6 +8,11 @@ log() {
   echo "=== $* ==="
 }
 log "Installing RPM packages"
+# Install Citrix
+cd /ctx/rpm
+wget https://media.githubusercontent.com/media/kohega/bazzite-khg/refs/heads/main/build_files/rpm/ICAClient-rhel-25.08.0.88-0.x86_64.rpm
+cd /
+
 # Install RPMs
 for rpm_file in ctx/rpm/*.rpm; do
     if [ -f "$rpm_file" ]; then
