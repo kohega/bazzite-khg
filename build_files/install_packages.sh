@@ -11,7 +11,7 @@ log() {
 log "Installing RPM packages"
 # Install Citrix
 /ctx/download-icaclient.sh
-dnf5 install -y /container/ICAClient-rhel-*.rpm
+dnf5 install -y ICAClient-rhel-*.rpm
 
 # Install RPMs
 for rpm_file in ctx/rpm/*.rpm; do
