@@ -24,6 +24,10 @@ log "Starting building"
 ### Create root directory for hdd mount points 
 mkdir /data /videos /games
 
+log "Remove /opt directory"
+rm /opt
+mkdir /opt
+
 ### Install packages
 log "Installing apps"
 echo_group /ctx/install_packages.sh

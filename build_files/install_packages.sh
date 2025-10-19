@@ -7,7 +7,6 @@ trap '[[ $BASH_COMMAND != echo* ]] && [[ $BASH_COMMAND != log* ]] && echo "+ $BA
 log() {
   echo "=== $* ==="
 }
-
 log "Installing RPM packages"
 # Install Citrix
 /ctx/download-icaclient.sh
