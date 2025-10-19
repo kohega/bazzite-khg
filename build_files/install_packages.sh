@@ -7,11 +7,11 @@ trap '[[ $BASH_COMMAND != echo* ]] && [[ $BASH_COMMAND != log* ]] && echo "+ $BA
 log() {
   echo "=== $* ==="
 }
+
 log "Installing RPM packages"
 # Install Citrix
-cd /ctx/rpm
-wget https://downloads.citrix.com/25463/ICAClient-rhel-25.08.0.88-0.x86_64.rpm?__gda__=exp=1760828668~acl=/*~hmac=4a03e1bc52a22d3f6d1772b88d6b7d912c184a00a80b1028a6d1cfc77b2162dc
-cd /
+./download-icaclient.sh
+dnf5 install -y /container/ICAClient-rhel-*.rpm
 
 # Install RPMs
 for rpm_file in ctx/rpm/*.rpm; do
