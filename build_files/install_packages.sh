@@ -8,6 +8,7 @@ log() {
   echo "=== $* ==="
 }
 log "Installing RPM packages"
+
 # Install Citrix
 /ctx/download-icaclient.sh
 dnf5 install -y ICAClient-rhel-*.rpm
@@ -19,6 +20,10 @@ for rpm_file in ctx/rpm/*.rpm; do
     fi
 done
 
+
+# Install Canon drivers
+/ctx/canon/install.sh
+
 log "Enable Copr repos"
 
 
@@ -27,7 +32,6 @@ COPR_REPOS=(
     zliced13/YACR
     atim/heroic-games-launcher
     zeno/scrcpy
-    codifryed/CoolerControl
     lnvso/heroic-games-launcher
     principis/howdy-beta
 )
@@ -52,6 +56,7 @@ LAYERED_PACKAGES=(
     filezilla
     firefox
     firefox-langpacks
+    thunderbird
     lact
     SDL2_ttf
     SDL2_image
@@ -67,7 +72,6 @@ LAYERED_PACKAGES=(
     gh
     qbittorrent
     discord
-    coolercontrold
     howdy
     python-elevate
     python-keyboard
