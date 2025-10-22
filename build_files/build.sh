@@ -25,8 +25,8 @@ log "Starting building"
 mkdir /data /videos /games
 
 log "Remove /opt directory"
-rm /opt /var/opt
-mkdir /opt /var/opt
+rm /opt
+mkdir -p /opt /var/opt
 
 ### Install packages
 log "Installing apps"
