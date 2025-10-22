@@ -20,10 +20,6 @@ for rpm_file in ctx/rpm/*.rpm; do
     fi
 done
 
-
-# Install Canon drivers
-/ctx/canon/install.sh
-
 log "Enable Copr repos"
 
 
