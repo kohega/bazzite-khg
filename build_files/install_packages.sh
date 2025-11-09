@@ -16,12 +16,6 @@ for rpm_file in ctx/rpm/*.rpm; do
     fi
 done
 
-<<<<<<< HEAD
-=======
-# Install Canon drivers
-/ctx/canon/install.sh
-
->>>>>>> e38444a (fix build)
 log "Enable Copr repos"
 COPR_REPOS=(
     ilyaz/LACT
