@@ -9,10 +9,6 @@ log() {
 }
 log "Installing RPM packages"
 
-# Install Citrix
-/ctx/download-icaclient.sh
-dnf5 install -y ICAClient-rhel-*.rpm
-
 # Install RPMs
 for rpm_file in ctx/rpm/*.rpm; do
     if [ -f "$rpm_file" ]; then
@@ -20,9 +16,13 @@ for rpm_file in ctx/rpm/*.rpm; do
     fi
 done
 
+<<<<<<< HEAD
+=======
+# Install Canon drivers
+/ctx/canon/install.sh
+
+>>>>>>> e38444a (fix build)
 log "Enable Copr repos"
-
-
 COPR_REPOS=(
     ilyaz/LACT
     zliced13/YACR
@@ -36,7 +36,6 @@ for repo in "${COPR_REPOS[@]}"; do
 done
 
 log "Install layered applications"
-
 # Layered Applications
 LAYERED_PACKAGES=(
     aria2c
@@ -76,11 +75,15 @@ LAYERED_PACKAGES=(
     opencv-devel
     v4l-utils
     xorg-x11-font-utils
-    gamemode
     libheif
     kimageformats
+    webkit2gtk3
 )
 dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
+
+# Install Citrix
+/ctx/download-icaclient.sh
+dnf5 install -y --skip-unavailable ICAClient-rhel-*.rpm
 
 # Merkuro Calendar
 dnf5 install --setopt=install_weak_deps=True --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y merkuro kdepim-runtime kdepim-addons akonadi
