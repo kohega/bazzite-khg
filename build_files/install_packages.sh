@@ -66,7 +66,11 @@ LAYERED_PACKAGES=(
     opencv-devel
     v4l-utils
     #howdy
-    xorg-x11-font-utils    
+    xorg-x11-font-utils
+    merkuro
+    kdepim-runtime
+    kdepim-addons
+    akonadi  
 )
 dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
 
@@ -74,11 +78,8 @@ dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable 
 /ctx/download-icaclient.sh
 rpm -i --nodeps ICAClient-rhel-*.rpm
 
-# Merkuro Calendar
-dnf5 install --setopt=install_weak_deps=True --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y merkuro kdepim-runtime kdepim-addons akonadi
-
 # Microsoft fonts    
-rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+rpm -i --nodigest --nodeps https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
 log "Disable Copr repos as we do not need it anymore"
 
