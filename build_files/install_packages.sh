@@ -72,7 +72,7 @@ dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable 
 
 # Install Citrix
 /ctx/download-icaclient.sh
-dnf5 install -y --skip-unavailable ICAClient-rhel-*.rpm
+rpm -i --nodeps ICAClient-rhel-*.rpm
 
 # Merkuro Calendar
 dnf5 install --setopt=install_weak_deps=True --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y merkuro kdepim-runtime kdepim-addons akonadi
