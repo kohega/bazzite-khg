@@ -9,10 +9,6 @@ log() {
 }
 log "Installing RPM packages"
 
-
-# Downgrade python for the moment
-dnf install -y python3.13-3.13.9-1.fc43.x86_64
-
 # Install RPMs
 for rpm_file in ctx/rpm/*.rpm; do
     if [ -f "$rpm_file" ]; then
@@ -32,7 +28,6 @@ COPR_REPOS=(
 for repo in "${COPR_REPOS[@]}"; do
     dnf5 -y copr enable "$repo"
 done
-
 
 log "Install layered applications"
 # Layered Applications
@@ -64,13 +59,13 @@ LAYERED_PACKAGES=(
     gh
     qbittorrent
     discord
-    python-elevate
-    python-keyboard
-    python-pyv4l2
+    #python-elevate
+    #python-keyboard
+    #python-pyv4l2
     opencv
     opencv-devel
     v4l-utils
-    howdy
+    #howdy
     xorg-x11-font-utils    
 )
 dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
