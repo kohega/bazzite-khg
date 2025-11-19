@@ -24,6 +24,7 @@ COPR_REPOS=(
     zeno/scrcpy
     lnvso/heroic-games-launcher
     principis/howdy-beta
+    @copr/PyPI
 )
 for repo in "${COPR_REPOS[@]}"; do
     dnf5 -y copr enable "$repo"
@@ -70,9 +71,7 @@ LAYERED_PACKAGES=(
     v4l-utils
     howdy
     xorg-x11-font-utils
-    libheif
-    kimageformats
-    
+    libheif    
 )
 dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
 
