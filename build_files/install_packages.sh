@@ -61,17 +61,18 @@ LAYERED_PACKAGES=(
     gh
     qbittorrent
     discord
-    howdy
+    python3
     python-elevate
     python-keyboard
     python-pyv4l2
     opencv
     opencv-devel
     v4l-utils
+    howdy
     xorg-x11-font-utils
     libheif
     kimageformats
-    webkit2gtk3
+    
 )
 dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
 
