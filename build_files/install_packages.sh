@@ -31,7 +31,7 @@ for repo in "${COPR_REPOS[@]}"; do
 done
 
 # Downgrade python for the moment
-dnf install -y python3-3.13.9-1.fc42.x86_64
+dnf install -y python3.13-3.13.9-1.fc43.x86_64
 
 log "Install layered applications"
 # Layered Applications
