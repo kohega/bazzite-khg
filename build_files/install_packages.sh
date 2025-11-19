@@ -30,6 +30,9 @@ for repo in "${COPR_REPOS[@]}"; do
     dnf5 -y copr enable "$repo"
 done
 
+# Downgrade python for the moment
+sudo dnf install -y python3.x86_64 3.13.9-1.fc42 
+
 log "Install layered applications"
 # Layered Applications
 LAYERED_PACKAGES=(
@@ -49,8 +52,6 @@ LAYERED_PACKAGES=(
     thunderbird
     lact
     SDL2_ttf
-    SDL2_image
-    inih
     kget
     heroic-games-launcher-bin
     kodi
@@ -62,7 +63,6 @@ LAYERED_PACKAGES=(
     gh
     qbittorrent
     discord
-    python3
     python-elevate
     python-keyboard
     python-pyv4l2
@@ -70,8 +70,7 @@ LAYERED_PACKAGES=(
     opencv-devel
     v4l-utils
     howdy
-    xorg-x11-font-utils
-    libheif    
+    xorg-x11-font-utils    
 )
 dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
 
