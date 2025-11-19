@@ -9,6 +9,10 @@ log() {
 }
 log "Installing RPM packages"
 
+
+# Downgrade python for the moment
+dnf install -y python3.13-3.13.9-1.fc43.x86_64
+
 # Install RPMs
 for rpm_file in ctx/rpm/*.rpm; do
     if [ -f "$rpm_file" ]; then
@@ -24,14 +28,11 @@ COPR_REPOS=(
     zeno/scrcpy
     lnvso/heroic-games-launcher
     principis/howdy-beta
-    @copr/PyPI
 )
 for repo in "${COPR_REPOS[@]}"; do
     dnf5 -y copr enable "$repo"
 done
 
-# Downgrade python for the moment
-dnf install -y python3.13-3.13.9-1.fc43.x86_64
 
 log "Install layered applications"
 # Layered Applications
