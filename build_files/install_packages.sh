@@ -49,8 +49,6 @@ LAYERED_PACKAGES=(
     naps2
     lact
     SDL2_ttf
-    SDL2_image
-    inih
     kget
     heroic-games-launcher-bin
     kodi
@@ -62,29 +60,27 @@ LAYERED_PACKAGES=(
     gh
     qbittorrent
     discord
-    howdy
-    python-elevate
-    python-keyboard
-    python-pyv4l2
+    #python-elevate
+    #python-keyboard
+    #python-pyv4l2
     opencv
     opencv-devel
     v4l-utils
+    #howdy
     xorg-x11-font-utils
-    libheif
-    kimageformats
-    webkit2gtk3
+    merkuro
+    kdepim-runtime
+    kdepim-addons
+    akonadi  
 )
 dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
 
 # Install Citrix
 /ctx/download-icaclient.sh
-dnf5 install -y --skip-unavailable ICAClient-rhel-*.rpm
-
-# Merkuro Calendar
-dnf5 install --setopt=install_weak_deps=True --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y merkuro kdepim-runtime kdepim-addons akonadi
+rpm -i --nodeps ICAClient-rhel-*.rpm
 
 # Microsoft fonts    
-rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+rpm -i --nodigest --nodeps https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
 log "Disable Copr repos as we do not need it anymore"
 
