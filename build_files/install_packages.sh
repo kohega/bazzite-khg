@@ -46,6 +46,7 @@ LAYERED_PACKAGES=(
     firefox
     firefox-langpacks
     thunderbird
+    naps2
     lact
     SDL2_ttf
     SDL2_image
