@@ -7,6 +7,31 @@ trap '[[ $BASH_COMMAND != echo* ]] && [[ $BASH_COMMAND != log* ]] && echo "+ $BA
 log() {
   echo "=== $* ==="
 }
+
+log "Install Howdy"
+
+git clone https://github.com/boltgolt/howdy /tmp/howdy
+dnf install -y \
+    git \
+    python3-devel \
+    cmake \
+    gcc-c++ \
+    pam-devel \
+    inih-devel \
+    opencv \
+    opencv-devel \
+    meson
+
+meson setup build
+meson compile -C build
+meson install -C build
+
+rm -rf /tmp/howdy
+dnf remove -y \
+    cmake \
+    gcc-c++ \
+    meson
+
 log "Installing RPM packages"
 
 # Install RPMs
@@ -77,6 +102,7 @@ dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable 
 # Install Citrix
 /ctx/download-icaclient.sh
 rpm -i --nodeps ICAClient-rhel-*.rpm
+rm ICAClient-rhel-*.rpm
 
 # Microsoft fonts    
 rpm -i --nodigest --nodeps https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
