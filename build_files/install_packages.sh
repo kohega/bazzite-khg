@@ -11,7 +11,7 @@ log() {
 log "Install Howdy"
 
 git clone https://github.com/boltgolt/howdy
-cd /tmp/howdy
+cd howdy/
 
 dnf install -y \
     git \
@@ -28,7 +28,7 @@ meson setup build
 meson compile -C build
 meson install -C build
 
-rm -rf /tmp/howdy
+rm -rf ../howdy
 dnf remove -y \
     cmake \
     gcc-c++ \
