@@ -22,7 +22,8 @@ dnf install -y \
     inih-devel \
     opencv \
     opencv-devel \
-    meson
+    meson \
+    libevdev
 
 meson setup build
 meson compile -C build
