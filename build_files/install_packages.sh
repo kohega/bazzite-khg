@@ -12,6 +12,7 @@ log "Install Howdy"
 
 git clone https://github.com/boltgolt/howdy
 cd /tmp/howdy
+
 dnf install -y \
     git \
     python3-devel \
