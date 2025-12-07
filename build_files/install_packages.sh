@@ -66,6 +66,7 @@ LAYERED_PACKAGES=(
     opencv-devel
     v4l-utils
     howdy
+    howdy-authselect
     xorg-x11-font-utils
     merkuro
     kdepim-runtime
