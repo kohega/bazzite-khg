@@ -71,7 +71,9 @@ LAYERED_PACKAGES=(
     merkuro
     kdepim-runtime
     kdepim-addons
-    akonadi  
+    akonadi
+    lsp-plugins-lv2
+    
 )
 dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
 
