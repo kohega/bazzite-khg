@@ -37,11 +37,17 @@ setsebool -P samba_enable_home_dirs=1
 log "Enable loading kernel modules"
 setsebool -P domain_kernel_load_modules on
 
+log "Remove Fedora's Firefox config"
+rm -f /usr/lib64/firefox/browser/defaults/preferences/firefox-redhat-default-prefs.js
+
 log "Enabling system services"
 systemctl enable podman.socket syncthing@kohega.service zerotier-one.service lactd.service smb.service
 
 log "Adding personal just recipes"
 echo "import \"/usr/share/kohega/just/kohega.just\"" >> /usr/share/ublue-os/justfile
+
+log "Set up time synchronization"
+timedatectl set-local-rtc '0'
 
 log "Setting up Howdy"
 chmod -R o+rx /usr/share/howdy/dlib-data

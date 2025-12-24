@@ -1,0 +1,7 @@
+[Unit]
+Description=ydotool user daemon
+[Service]
+ExecStart=/usr/bin/ydotoold --socket-perm=0660
+Restart=always
+[Install]
+WantedBy=default.target

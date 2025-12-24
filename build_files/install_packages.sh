@@ -20,8 +20,8 @@ COPR_REPOS=(
     ilyaz/LACT
     zliced13/YACR
     atim/heroic-games-launcher
+    #lnvso/heroic-games-launcher
     zeno/scrcpy
-    lnvso/heroic-games-launcher
     #principis/howdy-beta
     ronnypfannschmidt/howdy-beta
 )
@@ -34,12 +34,10 @@ LAYERED_PACKAGES=(
     aria2c
     kcalc
     konsole
-    kate
     krename
     haruna
     okular
     gwenview
-    ark
     syncthing
     filezilla
     firefox
@@ -48,7 +46,6 @@ LAYERED_PACKAGES=(
     naps2
     lact
     SDL2_ttf
-    kget
     heroic-games-launcher-bin
     kodi
     kodi-inputstream-adaptive
