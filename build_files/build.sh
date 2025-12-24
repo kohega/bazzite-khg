@@ -46,9 +46,6 @@ systemctl enable podman.socket syncthing@kohega.service zerotier-one.service lac
 log "Adding personal just recipes"
 echo "import \"/usr/share/kohega/just/kohega.just\"" >> /usr/share/ublue-os/justfile
 
-log "Set up time synchronization"
-timedatectl set-local-rtc '0'
-
 log "Setting up Howdy"
 chmod -R o+rx /usr/share/howdy/dlib-data
 chmod +x /usr/bin/howdy
