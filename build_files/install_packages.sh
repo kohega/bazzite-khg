@@ -19,8 +19,8 @@ log "Enabling COPR repos"
 COPR_REPOS=(
     ilyaz/LACT
     zliced13/YACR
-    atim/heroic-games-launcher
-    #lnvso/heroic-games-launcher
+    #atim/heroic-games-launcher
+    lnvso/heroic-games-launcher
     zeno/scrcpy
     #principis/howdy-beta
     ronnypfannschmidt/howdy-beta
