@@ -1,6 +1,6 @@
 #!/bin/sh
 
-url=https://www.citrix.com/downloads/workspace-app/linux/workspace-app-for-linux-latest.html
+url=https://www.citrix.com/downloads/workspace-app/legacy-workspace-app-for-linux/workspace-app-for-linux-250810.html
 
 #pkgver=24.5.0.76
 #_dl_urls="$(curl -sL "$url" | grep -E "rhel-$pkgver.*\.rpm\?__gda__.*")"
