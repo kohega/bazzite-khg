@@ -2,7 +2,8 @@
 
 # Purpose
 
-This repository is my own custom [bootc](https://github.com/bootc-dev/bootc) image based on [Bazzite](https://github.com/ublue-os/bazzite/). This personal image is for my HTPC, but it's running the desktop variant because I use [flex-launcher](https://github.com/complexlogic/flex-launcher) as a home launcher.
+This repository is my own custom [bootc](https://github.com/bootc-dev/bootc) image based on [Bazzite](https://github.com/ublue-os/bazzite/). This project started as a personal image for my HTPC, running the desktop variant because I use [flex-launcher](https://github.com/complexlogic/flex-launcher) as a home launcher.
+Now running on all my PCs except Steam Deck.
 
 # What's added
 
@@ -13,7 +14,7 @@ This repository is my own custom [bootc](https://github.com/bootc-dev/bootc) ima
 
 ## Tools
 - [Screenprofilerswap/Screenprofilerback](https://github.com/kohega/screenprofilerswap)
-- EDID file with Steam Deck OLED@60/90hz, iPad 10th gen, Ideapad Pro Gen10 (2880x1800@120), 1440p120/165 and 16:10 resolutions support for Sunshine. (Missing 4K and HDR)
+- EDID file support up to 4K120 HDR10+/DV, Steam Deck OLED@60/90hz and 16:10(max. 2560x1600) resolutions support for Sunshine.
   
 ## Theme
 
@@ -29,6 +30,7 @@ This repository is my own custom [bootc](https://github.com/bootc-dev/bootc) ima
 | merkuro      | Calendar application for KDE.                                   |
 | NAPS2                     | Tool for scanning documents.                                     |
 | epson-inkjet-printer-escpr| Printer driver for Epson inkjet printers.                        |
+| Citrix           |  Access virtual applications and desktops .                   |
 
 ### Internet and Network
 | Application       | Description                                                      |
@@ -36,6 +38,7 @@ This repository is my own custom [bootc](https://github.com/bootc-dev/bootc) ima
 | Discord           | Voice and text messaging app for communities.                   |
 | FileZilla         | FTP, FTPS, and SFTP client for file transfers.                  |
 | Firefox           | Open-source web browser.                                         |
+| Thunderbird       | Open-source e-mail client.                                         |
 | qBittorrent       | Open-source BitTorrent client.                                  |
 | Syncthing         | Decentralized file synchronization tool.                        |
 | Eddie-UI          | AirVPN client.                                                  |
@@ -48,7 +51,7 @@ This repository is my own custom [bootc](https://github.com/bootc-dev/bootc) ima
 | Heroic Games Launcher (bin)| Game launcher for Epic Games and GOG on Linux.                   |
 | Kodi                       | Media center for organizing and playing movies, music, etc.     |
 | kodi-inputstream-adaptive  | Kodi plugin for adaptive streaming playback.                    |
-| Flex-Launcher  | 10-foot HTPC application launcher.                    |
+| Flex-Launcher              | 10-foot HTPC application launcher.                    |
 
 ### Development and Libraries
  | Application               | Description                                                      |
@@ -91,16 +94,4 @@ This repository is my own custom [bootc](https://github.com/bootc-dev/bootc) ima
  | gwenview                  | Image viewer for KDE.                                            |
  | ark                       | Archiving tool for KDE.                                          |
  | kget                      | Download manager for KDE.                                        |
- | kvantum                   | Tool for customizing Qt application styles.                     |
-
-# Community
-
-- [**bootc discussion forums**](https://github.com/bootc-dev/bootc/discussions) - Nothing in this template is ublue specific, the upstream bootc project has a discussions forum where custom image builders can hang out and ask questions.
-
-## Community Examples
-
-- [m2Giles' OS](https://github.com/m2giles/m2os)
-- [bOS](https://github.com/bsherman/bos)
-- [Homer](https://github.com/bketelsen/homer/)
-- [Amy OS](https://github.com/astrovm/amyos)
-- [VeneOS](https://github.com/Venefilyn/veneos)
+ | kvantum                   | Tool for customizing Qt application styles.                     
