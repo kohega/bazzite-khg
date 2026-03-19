@@ -76,6 +76,17 @@ fix-bt:
     sudo modprobe btusb
     echo "Bluetooth fix complete."
 
+# Restart Webcam to fix issues
+fix-webcam:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    trap '[[ $BASH_COMMAND != echo* ]] && echo "+ $BASH_COMMAND"' DEBUG
+
+    echo "Fixing Webcam..."
+    sudo rmmod uvcvideo
+    sudo modprobe uvcvideo
+    echo "Webcam fix complete."
+
 # Clean up old packages and Docker/Podman images and volumes
 clean:
     #!/usr/bin/env bash
@@ -114,7 +125,7 @@ virtual-display:
 
   if ! rpm-ostree kargs | grep -q "drm.edid_firmware="; then
     echo "Updating rpm-ostree kernel arguments"
-    sudo rpm-ostree kargs --append "drm.edid_firmware=HDMI-A-1:edid/dummy-full.bin video=HDMI-A-1:e"
+    sudo rpm-ostree kargs --append "drm.edid_firmware=HDMI-A-1:edid/dummy-new-2026-latest.bin video=HDMI-A-1:e"
   else
     echo "Already enabled"
   fi

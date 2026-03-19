@@ -24,6 +24,7 @@ COPR_REPOS=(
     zeno/scrcpy
     #principis/howdy-beta
     ronnypfannschmidt/howdy-beta
+    faugus/faugus-launcher
 )
 for repo in "${COPR_REPOS[@]}"; do
     dnf5 -y copr enable "$repo"
@@ -47,6 +48,7 @@ LAYERED_PACKAGES=(
     lact
     SDL2_ttf
     heroic-games-launcher-bin
+    faugus-launcher
     kodi
     kodi-inputstream-adaptive
     audacity
