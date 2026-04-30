@@ -78,7 +78,7 @@ LAYERED_PACKAGES=(
     lsp-plugins-lv2
     
 )
-dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable -y "${LAYERED_PACKAGES[@]}"
+dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
 
 log "Installing Citrix"
 /ctx/download-icaclient.sh
