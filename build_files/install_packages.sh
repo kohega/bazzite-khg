@@ -25,6 +25,7 @@ COPR_REPOS=(
     #principis/howdy-beta
     ronnypfannschmidt/howdy-beta
     #faugus/faugus-launcher
+    pvermeer/sunshine
 )
 for repo in "${COPR_REPOS[@]}"; do
     dnf5 -y copr enable "$repo"
@@ -76,7 +77,7 @@ LAYERED_PACKAGES=(
     kdepim-addons
     akonadi
     lsp-plugins-lv2
-    
+    sunshine-beta
 )
 dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
 
