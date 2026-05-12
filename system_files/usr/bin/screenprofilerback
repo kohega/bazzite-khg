@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Update only the fps_limit line in MangoHud.conf to 120
+sed -i 's/^fps_limit=.*/fps_limit=165,120,0/' ~/.config/MangoHud/MangoHud.conf
+
 # Execute the command three times
 for i in {1..2}; do
   $HOME/.local/bin/screenprofilercmd load native 0
