@@ -23,6 +23,6 @@ find /var/cache/* -maxdepth 0 -type d \! -name libdnf5 \! -name rpm-ostree -exec
 mkdir -p /tmp
 mkdir -p /var/tmp \
 && chmod -R 1777 /var/tmp
-rm /ctx
+rm -rf /ctx
 
 log "Cleanup completed"
