@@ -23,10 +23,6 @@ chmod -R 1777 /var/tmp
 find /var/* -maxdepth 0 -type d \! -name cache -exec rm -fr {} \;
 find /var/cache/* -maxdepth 0 -type d \! -name libdnf5 \! -name rpm-ostree -exec rm -fr {} \;
 
-# Restore and setup directories
-rm -rf /{boot,home,root,srv,mnt,var,usr/local}
-rm -rf /{build,packages}
-
 # create symlinks for bootc filesystem layout
 ln -sT sysroot/ostree /ostree
 ln -sT var/roothome /root
