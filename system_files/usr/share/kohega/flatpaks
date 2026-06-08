@@ -5,8 +5,6 @@ com.github.tchx84.Flatseal
 com.moonlight_stream.Moonlight
 com.rustdesk.RustDesk
 com.spotify.Client
-com.steamgriddb.SGDBoop
-com.vscodium.codium
 com.vysp3r.ProtonPlus
 de.leopoldluley.Clapgrep
 io.ente.auth
@@ -19,11 +17,6 @@ org.localsend.localsend_app
 org.onlyoffice.desktopeditors
 org.prismlauncher.PrismLauncher
 org.rncbc.qpwgraph
-runtime/com.obsproject.Studio.Plugin.Gstreamer
-runtime/com.obsproject.Studio.Plugin.GStreamerVaapi
-runtime/com.obsproject.Studio.Plugin.OBSVkCapture
-runtime/org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08
-runtime/org.freedesktop.Platform.VulkanLayer.OBSVkCapture/x86_64/23.08
-runtime/org.freedesktop.Platform.VulkanLayer.vkBasalt/x86_64/23.08
-runtime/org.gtk.Gtk3theme.adw-gtk3-dark/x86_64/3.22
-runtime/org.gtk.Gtk3theme.adw-gtk3/x86_64/3.22
+io.github.radiolamp.mangojuice
+org.jdownloader.JDownloader
+org.telegram.desktop

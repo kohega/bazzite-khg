@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Game;
+Comment=Ankama portal and game launcher for Dofus.
+Exec=env DESKTOPINTEGRATION=1 /var/home/kohega/Applications/ankama_launcher.appimage --no-sandbox %U
+Icon=/usr/share/icons/dofus-logo.png
+MimeType=x-scheme-handler/zaap;
+Name=Ankama Launcher
+NoDisplay=false
+Path=
+PrefersNonDefaultGPU=false
+StartupNotify=true
+StartupWMClass=Ankama Launcher
+Terminal=false
+TerminalOptions=
+TryExec=/var/home/kohega/Applications/ankama_launcher.appimage
+Type=Application
+X-AppImage-Name=Ankama Launcher
+X-AppImage-Version=3.14.8.20373
+X-KDE-SubstituteUID=false
+X-KDE-Username=

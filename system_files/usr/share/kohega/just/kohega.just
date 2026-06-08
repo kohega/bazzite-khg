@@ -12,57 +12,70 @@ install-appimages:
     [ ! -d "$DOWNLOAD_DIR" ] && DOWNLOAD_DIR="$HOME"
 
     # Install Gear Lever if not installed
-    flatpak list | grep -q "it.mijorus.gearlever" || flatpak --system -y install it.mijorus.gearlever
+    flatpak list | grep -q "it.mijorus.gearlever" || flatpak --user -y install it.mijorus.gearlever
 
     while IFS=, read -r name url; do
       [ -z "$name" -o -z "$url" ] && continue
       echo "Processing $name..."
 
       # Skip if installed
-      if flatpak run it.mijorus.gearlever --list-installed | grep -qi "${name}.appimage"; then
+      if flatpak run it.mijorus.gearlever --list-installed | grep -qi "$name"; then
         echo "$name already installed"
         continue
       fi
 
-      # Handle GitHub wildcards
-      if [[ "$url" =~ github.com/([^/]+/[^/]+)/releases/download/[^/]*/([^/]*) ]] && [[ "$url" == *"*"* ]]; then
-        pattern="$(echo "${BASH_REMATCH[2]}" | sed 's/\./\\./g' | sed 's/\*/.*/g')"
-        # Try each release until we find one with an AppImage
-        url=""
-        while read -r release_url; do
-          if [[ "$release_url" =~ $pattern ]]; then
-            url="$release_url"
-            break
-          fi
-        done < <(curl --retry 3 -sL "https://api.github.com/repos/${BASH_REMATCH[1]}/releases" | jq -r ".[].assets[].browser_download_url")
-        [ -z "$url" ] && {
-          echo "No release found for $name"
-          continue
-        }
-      fi
+      # Initialize variables for update source
+      repo=""
+      release_file_pattern=""
 
-      # Handle JSON API responses (like cursor.com API)
-      if [[ "$url" != http*github.com* ]]; then
-        response=$(curl --retry 3 -sL "$url")
-        if echo "$response" | jq -e '.downloadUrl' >/dev/null 2>&1; then
-          url=$(echo "$response" | jq -r '.downloadUrl')
-          echo "  Found download URL in JSON: $url"
-        elif echo "$response" | jq -e '.download_url' >/dev/null 2>&1; then
-          url=$(echo "$response" | jq -r '.download_url')
-          echo "  Found download URL in JSON: $url"
+      # Handle GitHub URLs
+      if [[ "$url" =~ github.com/([^/]+/[^/]+)/releases/download/ ]]; then
+        repo="${BASH_REMATCH[1]}"
+        # Extract the release file pattern from the URL
+        release_file_pattern=$(echo "$url" | grep -oE '[^/]+$' | sed 's/\*/\*/g')
+        # Resolve wildcard URL for GitHub
+        if [[ "$url" == *"*"* ]]; then
+          pattern=$(echo "$release_file_pattern" | sed 's/\./\\./g; s/\*/.*/g')
+          assets_url="https://api.github.com/repos/$repo/releases"
+          url=$(curl -sL -H "User-Agent: kohega-appimage-installer" "$assets_url" | \
+                jq -r ".[].assets[].browser_download_url" | \
+                grep -E "$pattern" | \
+                head -n1)
+          [ -z "$url" ] && { echo "No matching release found for $name"; continue; }
         fi
       fi
 
       # Download and install
-      appimage="$DOWNLOAD_DIR/${name}.appimage"
-      if aria2c --dir="$(dirname "$appimage")" --out="$(basename "$appimage")" --max-tries=3 --connect-timeout=30 "$url" && chmod +x "$appimage" && flatpak run it.mijorus.gearlever --integrate "$appimage" -y; then
-        echo "$name installed successfully"
+      appimage="$DOWNLOAD_DIR/${name}.AppImage"
+      if aria2c --dir="$(dirname "$appimage")" --out="$(basename "$appimage")" --max-tries=3 --connect-timeout=30 "$url" && \
+        chmod +x "$appimage" && \
+        flatpak run it.mijorus.gearlever --integrate "$appimage" -y; then
+        echo "$name integrated successfully."
+
+        # Find the AppImage path in Gear Lever's Applications directory
+        app_path="/var/home/kohega/Applications/${name}.appimage"
+
+        # Set update source for GitHub AppImages
+        if [ -n "$repo" ] && [ -n "$release_file_pattern" ]; then
+          echo "Setting update source for $name..."
+          flatpak run it.mijorus.gearlever --set-update-source "$app_path" \
+            --manager GithubUpdater \
+            repo="$repo" \
+            repo_filename="$release_file_pattern" \
+            allow_prereleases=false
+          echo "Update source configured for $name."
+        else
+          echo "No update source configured for $name (not a GitHub AppImage)."
+        fi
       else
         echo "Failed to install $name"
       fi
       rm -f "$appimage"
-    done < <(/usr/share/kohega/appimages)
-    echo "AppImages installation complete."
+    done < /usr/share/kohega/appimages
+
+    echo "AppImages installation and update source configuration complete."
+    echo "Restart Gear Lever GUI to see the changes."
+
 
 # Restart Bluetooth to fix issues
 fix-bt:

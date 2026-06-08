@@ -41,7 +41,7 @@ log "Remove Fedora's Firefox config"
 rm -f /usr/lib64/firefox/browser/defaults/preferences/firefox-redhat-default-prefs.js
 
 log "Enabling system services"
-systemctl enable podman.socket syncthing@kohega.service zerotier-one.service lactd.service smb.service
+systemctl enable podman.socket syncthing@kohega.service zerotier-one.service lactd.service smb.service tuned-ppd.service tuned.service uupd.timer
 
 log "Adding personal just recipes"
 echo "import \"/usr/share/kohega/just/kohega.just\"" >> /usr/share/ublue-os/justfile

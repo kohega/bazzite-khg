@@ -1,0 +1,14 @@
+[Desktop Entry]
+Comment=Display and control your Android device
+Exec=/bin/sh -c '\\$SHELL -i -c scrcpy' --v4l2-sink=/dev/video0 --no-video-playback --no-audio --video-bit-rate=16M --video-codec=h264 --orientation=270
+GenericName=Android Remote Control
+Icon=scrcpy
+Name=scrcpy-cam
+NoDisplay=false
+Path=
+StartupNotify=false
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
