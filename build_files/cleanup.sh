@@ -16,13 +16,16 @@ dnf5 clean all
 rm -rf /tmp/* || true
 rm -rf /usr/etc
 rm -rf /boot && mkdir /boot
+rm -rf /usr/local
 
 # (re)create essential system directories
+ln -sT /var/usrlocal /usr/local
 mkdir -p /sysroot /boot /usr/lib/ostree /var /tmp /var/tmp
 chmod -R 1777 /var/tmp
 
 # Clean /var directory while preserving essential files
 find /var/* -maxdepth 0 -type d \! -name cache \! -name log -exec rm -rf {} \;
 find /var/cache/* -maxdepth 0 -type d \! -name libdnf5 -exec rm -rf {} \;
+
 
 log "Cleanup completed"
