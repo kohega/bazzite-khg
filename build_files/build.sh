@@ -46,11 +46,6 @@ systemctl enable podman.socket syncthing@kohega.service zerotier-one.service lac
 log "Adding personal just recipes"
 echo "import \"/usr/share/kohega/just/kohega.just\"" >> /usr/share/ublue-os/justfile
 
-log "Setting up Howdy"
-chmod -R o+rx /usr/share/howdy/dlib-data
-chmod +x /usr/bin/howdy
-chmod 755 /usr/lib64/security/pam_howdy.so
-
 log "Rebuild initramfs"
 echo_group /ctx/build-initramfs.sh
 
