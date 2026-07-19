@@ -22,9 +22,6 @@ COPR_REPOS=(
     atim/heroic-games-launcher
     #lnvso/heroic-games-launcher
     zeno/scrcpy
-    #principis/howdy-beta
-    ronnypfannschmidt/howdy-beta
-    #faugus/faugus-launcher
     pvermeer/sunshine
 )
 for repo in "${COPR_REPOS[@]}"; do
@@ -35,6 +32,31 @@ dnf5 -y install \
         https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
         https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm && \
 dnf5 -y config-manager setopt "*rpmfusion*".priority=5 "*rpmfusion*".exclude="mesa-*" "*rpmfusion*".enabled=0 && \
+
+# ZeroTier repo
+# Add ZeroTier GPG key
+curl -s https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg | tee /etc/pki/rpm-gpg/RPM-GPG-KEY-zerotier
+# Add ZeroTier repository
+cat << 'EOF' | tee /etc/yum.repos.d/zerotier.repo
+[zerotier]
+name=ZeroTier, Inc. RPM Release Repository
+baseurl=http://download.zerotier.com/redhat/fc/42
+enabled=1
+gpgcheck=0
+EOF
+
+# Gaze (facial-auth)
+rpm --import https://packages.gundulabs.com/keys/gundulabs-repo.asc
+tee /etc/yum.repos.d/gundulabs.repo >/dev/null <<'EOF'
+[gundulabs]
+name=Gundu Labs
+baseurl=https://packages.gundulabs.com/rpm/fedora/$releasever/$basearch
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.gundulabs.com/keys/gundulabs-repo.asc
+EOF
+dnf makecache
 
 log "Install layered applications"
 LAYERED_PACKAGES=(
@@ -67,10 +89,7 @@ LAYERED_PACKAGES=(
     python-keyboard
     python-pyv4l2
     opencv
-    opencv-devel
     v4l-utils
-    howdy
-    howdy-authselect
     xorg-x11-font-utils
     merkuro
     kdepim-runtime
@@ -78,6 +97,9 @@ LAYERED_PACKAGES=(
     akonadi
     lsp-plugins-lv2
     sunshine-beta
+    zerotier-one
+    gaze
+    gaze-gui
 )
 dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable --enable-repo="*rpmfusion*" -y "${LAYERED_PACKAGES[@]}"
 
@@ -94,19 +116,5 @@ for repo in "${COPR_REPOS[@]}"; do
     dnf5 -y copr disable "$repo"
 done
 
-log "Installing ZeroTier"
-# Add ZeroTier GPG key
-curl -s https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg | tee /etc/pki/rpm-gpg/RPM-GPG-KEY-zerotier
-# Add ZeroTier repository
-cat << 'EOF' | tee /etc/yum.repos.d/zerotier.repo
-[zerotier]
-name=ZeroTier, Inc. RPM Release Repository
-baseurl=http://download.zerotier.com/redhat/fc/42
-enabled=1
-gpgcheck=0
-EOF
 
-# Install ZeroTier
-dnf install -y zerotier-one
-# Remove repos
 rm /etc/yum.repos.d/zerotier.repo -f
