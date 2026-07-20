@@ -3,7 +3,7 @@ FROM scratch AS ctx
 COPY build_files /
 
 # Bazzite base
-FROM ghcr.io/ublue-os/bazzite:stable AS base
+FROM ghcr.io/ublue-os/bazzite:44.20260511 AS base
 RUN rm /usr/share/ublue-os/bazzite/flatpak/install
 COPY system_files /
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
