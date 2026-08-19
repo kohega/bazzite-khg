@@ -5,7 +5,6 @@ COPY build_files /
 # Bazzite base
 FROM ghcr.io/ublue-os/bazzite:testing AS base
 RUN rm /usr/share/ublue-os/bazzite/flatpak/install
-RUN rm /opt && mkdir /opt
 COPY system_files /
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
