@@ -32,10 +32,10 @@ log "Installing apps"
 echo_group /ctx/install_packages.sh
 
 log "Allow Samba on home dirs"
-setsebool -P samba_enable_home_dirs=1
+#setsebool -P samba_enable_home_dirs=1
 
 log "Enable loading kernel modules"
-setsebool -P domain_kernel_load_modules on
+#setsebool -P domain_kernel_load_modules on
 
 log "Remove Fedora's Firefox config"
 rm -f /usr/lib64/firefox/browser/defaults/preferences/firefox-redhat-default-prefs.js
