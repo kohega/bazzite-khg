@@ -1,4 +1,5 @@
 com.dec05eba.gpu_screen_recorder
+com.github.Matoking.protontricks
 com.github.mtkennerly.ludusavi
 com.github.taiko2k.tauonmb
 com.github.tchx84.Flatseal
@@ -9,14 +10,15 @@ com.vysp3r.ProtonPlus
 de.leopoldluley.Clapgrep
 io.ente.auth
 io.github.flattool.Warehouse
+io.github.radiolamp.mangojuice
 io.github.ungoogled_software.ungoogled_chromium
 it.mijorus.gearlever
 org.gimp.GIMP
+org.jdownloader.JDownloader
 org.kde.kdenlive
+org.kde.kamoso
 org.localsend.localsend_app
 org.onlyoffice.desktopeditors
 org.prismlauncher.PrismLauncher
 org.rncbc.qpwgraph
-io.github.radiolamp.mangojuice
-org.jdownloader.JDownloader
 org.telegram.desktop

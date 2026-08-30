@@ -14,7 +14,17 @@ Now running on all my PCs except Steam Deck.
 
 ## Tools
 - [Screenprofilerswap/Screenprofilerback](https://github.com/kohega/screenprofilerswap)
-- EDID file support up to 4K120 HDR10+/DV, Steam Deck OLED@60/90hz and 16:10(max. 2560x1600) resolutions support for Sunshine.
+- EDID file support up to 4K120 HDR10+/DV for Sunshine dumped from my TV.
+    - 1280x720@120
+    - 1280x800@60/120
+    - 1920x1080@60/120/240
+    - 1920x1200@60/90/120
+    - 2340x1600@60 (iPad 10th)
+    - 2442x1290@120 (iPhone 14 Pro Max - Safe Area)
+    - 2560x1440@120
+    - 2560x1600@120
+    - 2800x1800@120
+    - 3840x2160@120
   
 ## Theme
 
@@ -72,7 +82,6 @@ Now running on all my PCs except Steam Deck.
  | Application               | Description                                                      |
  |---------------------------|------------------------------------------------------------------|
  | virt-manager              | Graphical interface for managing virtual machines (KVM/QEMU).   |
- | coolercontrold            | Tool to control fans and PC cooling.                             |
  | gamemode                  | Tool to optimize system performance for games.                  |
 
 ### System and Terminal Tools
@@ -80,7 +89,7 @@ Now running on all my PCs except Steam Deck.
  |---------------------------|------------------------------------------------------------------|
  | aria2c                    | Command-line tool for downloading files (HTTP, FTP, etc.).      |
  | scrcpy                    | Tool to control an Android device from a PC.                    |
- | howdy                     | Tool for facial recognition.                                    |
+ | gaze                     | Tool for facial recognition. Windows Hello alternative            |
  | msttcore-fonts-installer  | Microsoft core fonts installer.                                  |
 
 ### KDE Applications
