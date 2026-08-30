@@ -15,10 +15,11 @@ for rpm_file in ctx/rpm/*.rpm; do
     fi
 done
 
-log "Enabling COPR repos"
+log "Enabling COPR and repos"
 COPR_REPOS=(
     ilyaz/LACT
     zliced13/YACR
+    faugus/faugus-launcher
     atim/heroic-games-launcher
     #lnvso/heroic-games-launcher
     zeno/scrcpy
@@ -76,6 +77,7 @@ LAYERED_PACKAGES=(
     lact
     SDL2_ttf
     heroic-games-launcher-bin
+    faugus
     kodi
     kodi-inputstream-adaptive
     audacity
@@ -91,6 +93,7 @@ LAYERED_PACKAGES=(
     opencv
     v4l-utils
     xorg-x11-font-utils
+    nss-mdns
     merkuro
     kdepim-runtime
     kdepim-addons
@@ -115,6 +118,4 @@ log "Disable COPR repos as we do not need it anymore"
 for repo in "${COPR_REPOS[@]}"; do
     dnf5 -y copr disable "$repo"
 done
-
-
 rm /etc/yum.repos.d/zerotier.repo -f
