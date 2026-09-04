@@ -77,7 +77,7 @@ LAYERED_PACKAGES=(
     lact
     SDL2_ttf
     heroic-games-launcher-bin
-    faugus
+    faugus-launcher
     kodi
     kodi-inputstream-adaptive
     audacity
