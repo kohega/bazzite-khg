@@ -1,23 +1,50 @@
 #!/bin/bash
 
-# Chemin vers le fichier de log (à adapter selon la configuration de votre système)
+# ============================================================
+# Configuration
+# ============================================================
+
 SUNSHINE_LOG="$HOME/.config/sunshine/sunshine.log"
+SCREENPROFILERCMD="$HOME/.local/bin/screenprofilercmd"
 
-# Extraction du mode de résolution (dernière occurrence)
-resolution=$(grep -m 1 "mode --" "$SUNSHINE_LOG" | tail -n 1 | awk -F"mode --" '{print $2}' | awk -F'x' '{print $1 "x" $2}')
+# ============================================================
+# Résolution
+# ============================================================
 
-# Affichage de la valeur associée à 'mode --'
-echo "Dernière valeur associée à 'mode --' dans $SUNSHINE_LOG : $resolution"
+resolution=$(
+    grep "mode --" "$SUNSHINE_LOG" |
+    tail -n 1 |
+    awk -F"mode --" '{print $2}' |
+    sed 's/^[[:space:]]*//' |
+    grep -oE '^[0-9]+x[0-9]+'
+)
 
-# Update fps_limit based on resolution
-if [[ "$resolution" == "1920x1200" || "$resolution" == "1280x800" ]]; then
-  sed -i 's/^fps_limit=.*/fps_limit=90,0/' ~/.config/MangoHud/MangoHud.conf
-else
-  sed -i 's/^fps_limit=.*/fps_limit=120,0/' ~/.config/MangoHud/MangoHud.conf
+if [ -z "$resolution" ]; then
+    echo "Impossible de déterminer la résolution." >&2
+    exit 1
 fi
 
-# Launch the program with the resolution as an argument
-for i in {1..2}; do
-  $HOME/.local/bin/screenprofilercmd load $resolution 0
-done
+echo "Dernière résolution associée à 'mode --' : $resolution"
 
+# ============================================================
+# MangoHud - FPS limit
+# ============================================================
+
+if [[ "$resolution" == "1920x1200" || "$resolution" == "1280x800" ]]; then
+    sed -i 's/^fps_limit=.*/fps_limit=90,0/' "$HOME/.config/MangoHud/MangoHud.conf"
+    echo "MangoHud : fps_limit=90,0"
+else
+    sed -i 's/^fps_limit=.*/fps_limit=120,0/' "$HOME/.config/MangoHud/MangoHud.conf"
+    echo "MangoHud : fps_limit=120,0"
+fi
+
+# ============================================================
+# Charger le profil
+# ============================================================
+
+echo
+echo "Chargement du profil : $resolution"
+
+"$SCREENPROFILERCMD" load "$resolution"
+
+exit $?

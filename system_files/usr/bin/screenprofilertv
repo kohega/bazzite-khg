@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Update only the fps_limit line in MangoHud.conf to 120
-sed -i 's/^fps_limit=.*/fps_limit=120,0/' ~/.config/MangoHud/MangoHud.conf
+sed -i 's/^fps_limit=.*/fps_limit=165,120,0/' "$HOME/.config/MangoHud/MangoHud.conf"
+echo "MangoHud : fps_limit=165,120,0"
 
-# Launch the program with the resolution as an argument
-for i in {1..2}; do
-  $HOME/.local/bin/screenprofilercmd load tv 0
-done
+echo
+echo "Chargement du profil : Native"
+
+$HOME/.local/bin/screenprofilercmd load tv 0
 nohup /usr/bin/bazzite-steam-bpm > /dev/null 2>&1 &
