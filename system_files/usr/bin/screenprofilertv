@@ -1,10 +1,36 @@
 #!/bin/bash
 
-sed -i 's/^fps_limit=.*/fps_limit=165,120,0/' "$HOME/.config/MangoHud/MangoHud.conf"
-echo "MangoHud : fps_limit=165,120,0"
+export XDG_RUNTIME_DIR="/run/user/1000"
+export WAYLAND_DISPLAY="wayland-0"
+export DISPLAY=":0"
 
-echo
-echo "Chargement du profil : Native"
+# Récupère dynamiquement le XAUTHORITY de la session graphique en cours
+_xauth="$(cat /proc/$(pgrep -u "$USER" -x plasmashell | head -1)/environ 2>/dev/null | tr '\0' '\n' | grep '^XAUTHORITY=' | cut -d= -f2-)"
+if [ -n "$_xauth" ]; then
+  export XAUTHORITY="$_xauth"
+else
+  echo "[screenprofilertv] WARNING: impossible de déterminer XAUTHORITY (plasmashell introuvable ?)"
+fi
 
-$HOME/.local/bin/screenprofilercmd load tv 0
-nohup /usr/bin/bazzite-steam-bpm > /dev/null 2>&1 &
+# Launch the program with the resolution as an argument
+for i in {1..2}; do
+  $HOME/.local/bin/screenprofilercmd load tv 0
+done
+pactl set-default-sink alsa_output.pci-0000_28_00.1.hdmi-surround71-extra3
+echo "TV HDMI output set."
+sed -i 's/^fps_limit=.*/fps_limit=120,0/' ~/.config/MangoHud/MangoHud.conf
+echo "MangoHud configuration updated successfully."
+
+# Si Steam tourne déjà, on ramène juste Big Picture au premier plan
+# (on saute le +quit/relaunch de bazzite-steam-bpm, qui est là pour
+# contourner un bug de lenteur mais rallonge le délai inutilement ici)
+BAZZITE_STEAM_BIN=/usr/bin/bazzite-steam
+
+if pgrep -u "$USER" -x steam > /dev/null 2>&1; then
+  echo "Steam déjà lancé, on ramène Big Picture au premier plan."
+  "${BAZZITE_STEAM_BIN}" steam://open/bigpicture > /dev/null 2>&1 &
+  echo "Big Picture demandé (PID: $!)."
+else
+  /usr/bin/bazzite-steam-bpm > /dev/null 2>&1 &
+  echo "bazzite-steam-bpm launched successfully (PID: $!)."
+fi
