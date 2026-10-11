@@ -1,0 +1,61 @@
+#!/bin/bash
+set -u
+
+export XDG_RUNTIME_DIR="/run/user/1000"
+export WAYLAND_DISPLAY="wayland-0"
+export DISPLAY=":0"
+
+# Attend que plasmashell soit lancé (utile juste après un réveil WoL à froid,
+# où sshd répond avant que la session graphique soit complètement chargée).
+# Si plasmashell tourne déjà, ça retourne quasi instantanément.
+wait_for_plasmashell() {
+    local timeout=30
+    local interval=1
+    local waited=0
+
+    while ! pgrep -u "$USER" -x plasmashell > /dev/null 2>&1; do
+        if (( waited >= timeout )); then
+            echo "[gamingctl] ERROR: plasmashell introuvable après ${timeout}s, abandon"
+            return 1
+        fi
+        sleep "$interval"
+        waited=$((waited + interval))
+    done
+
+    return 0
+}
+
+if ! wait_for_plasmashell; then
+    exit 1
+fi
+
+case "${1:-}" in
+
+    start)
+        echo "[gamingctl] Starting TV gaming mode..."
+
+        if ! screenprofilertv; then
+            echo "[gamingctl] ERROR: unable to start TV mode"
+            exit 1
+        fi
+
+        echo "[gamingctl] TV gaming mode started"
+        ;;
+
+    stop)
+        echo "[gamingctl] Restoring desktop..."
+
+        if ! screenprofilerback; then
+            echo "[gamingctl] ERROR: unable to restore desktop"
+            exit 1
+        fi
+
+        echo "[gamingctl] Desktop restored"
+        ;;
+
+    *)
+        echo "Usage: $0 {start|stop}"
+        exit 1
+        ;;
+
+esac
