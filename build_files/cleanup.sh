@@ -15,12 +15,13 @@ dnf5 clean all
 # Remove tmp files and everything in dirs that make bootc unhappy
 rm -rf /tmp/* || true
 rm -rf /usr/etc
-rm -rf /boot && mkdir /boot
+rm -rf /boot
 rm -rf /usr/local
+rm -rf /run
 
 # (re)create essential system directories
 ln -sT /var/usrlocal /usr/local
-mkdir -p /sysroot /boot /usr/lib/ostree /var /tmp /var/tmp
+mkdir -p /sysroot /boot /usr/lib/ostree /var /tmp /var/tmp /run
 chmod -R 1777 /var/tmp
 
 # Clean /var directory while preserving essential files
