@@ -1,7 +1,8 @@
 
 install-system-flatpaks:
     #!/usr/bin/bash
-    FLATPAK_LIST="$(curl https://raw.githubusercontent.com/kohega/bazzite-khg/refs/heads/main/system_files/usr/share/kohega/flatpaks | tr '\n' ' ')"
+    set -euo pipefail
+    FLATPAK_LIST="$(tr '\n' ' ' < /usr/share/kohega/flatpaks)"
     flatpak --system -y install ${FLATPAK_LIST}
 
 install-appimages:
@@ -53,7 +54,7 @@ install-appimages:
         echo "$name integrated successfully."
 
         # Find the AppImage path in Gear Lever's Applications directory
-        app_path="/var/home/kohega/Applications/${name}.appimage"
+        app_path="${HOME}/Applications/${name}.appimage"
 
         # Set update source for GitHub AppImages
         if [ -n "$repo" ] && [ -n "$release_file_pattern" ]; then
@@ -75,7 +76,6 @@ install-appimages:
 
     echo "AppImages installation and update source configuration complete."
     echo "Restart Gear Lever GUI to see the changes."
-
 
 # Restart Bluetooth to fix issues
 fix-bt:
@@ -100,62 +100,49 @@ fix-webcam:
     sudo modprobe uvcvideo
     echo "Webcam fix complete."
 
-# Clean up old packages and Docker/Podman images and volumes
+# Clean up old packages and container images
 clean:
     #!/usr/bin/env bash
-    set -euo pipefail
+    # Pas de -e : une commande en échec ne doit pas bloquer les suivantes
+    set -uo pipefail
 
     echo "Cleaning up system..."
-    docker system prune -af
-    podman system prune -af
-    flatpak uninstall --unused
+    for engine in docker podman; do
+        command -v "$engine" > /dev/null || continue
+        "$engine" image prune -af
+        sudo "$engine" image prune -af
+    done
+    flatpak uninstall --unused -y
     rpm-ostree cleanup -bm
-    nix-collect-garbage -d
-    sudo docker system prune -af
-    sudo podman system prune -af
-    sudo -i nix-collect-garbage -d
+    if command -v nix-collect-garbage > /dev/null; then
+        nix-collect-garbage -d
+        sudo -i nix-collect-garbage -d
+    fi
 
 # Enable AMD GPU overclocking capability. This can then be changed in for example LACT.
 enable-amdgpu-oc:
-  #!/usr/bin/env bash
-  set -euo pipefail
+    #!/usr/bin/env bash
+    set -euo pipefail
 
-  echo "Enabling AMD GPU overclocking"
+    echo "Enabling AMD GPU overclocking"
 
-  if ! rpm-ostree kargs | grep -q "amdgpu.ppfeaturemask="; then
-    echo "Updating rpm-ostree kernel arguments"
-    sudo rpm-ostree kargs --append "amdgpu.ppfeaturemask=0xFFF7FFFF"
-  else
-    echo "Already enabled"
-  fi
+    if ! rpm-ostree kargs | grep -q "amdgpu.ppfeaturemask="; then
+      echo "Updating rpm-ostree kernel arguments"
+      sudo rpm-ostree kargs --append "amdgpu.ppfeaturemask=0xFFF7FFFF"
+    else
+      echo "Already enabled"
+    fi
 
 # Add a Virtual Display from a EDID file
 virtual-display:
-  #!/usr/bin/env bash
-  set -euo pipefail
+    #!/usr/bin/env bash
+    set -euo pipefail
 
-  echo "Enabling Virtual Dummy Display"
+    echo "Enabling Virtual Dummy Display"
 
-  if ! rpm-ostree kargs | grep -q "drm.edid_firmware="; then
-    echo "Updating rpm-ostree kernel arguments"
-    sudo rpm-ostree kargs --append "drm.edid_firmware=HDMI-A-1:edid/dummy-new-2026-latest.bin video=HDMI-A-1:e"
-  else
-    echo "Already enabled"
-  fi
-
-howdy-setup:
-  #!/usr/bin/env bash
-  sudo cp /etc/pam.d/sudo /etc/pam.d/sudo.bak
-  sudo cp /etc/pam.d/kde /etc/pam.d/kde.bak
-  sudo sed -i '2i\auth       sufficient   pam_howdy.so no_confirmation' /etc/pam.d/sudo  
-  sudo sed -i '2i\auth       sufficient   pam_howdy.so' /etc/pam.d/system_auth
-  sudo sed -i '2i\auth       sufficient   pam_howdy.so' /etc/pam.d/kde
-  sudo chmod o+rw /dev/video*
-  sudo chmod 666 /dev/video*
-  sudo chmod 755 /usr/lib64/security/pam_howdy.so
-  sudo usermod -aG video gdm
-  sudo checkmodule -M -m -o /etc/howdy/howdy.mod /etc/howdy/howdy.te
-  sudo semodule_package -o /etc/howdy/howdy.pp -m /etc/howdy/howdy.mod
-  sudo semodule -i /etc/howdy/howdy.pp
-  sudo howdy add
-  sudo howdy test
+    if ! rpm-ostree kargs | grep -q "drm.edid_firmware="; then
+      echo "Updating rpm-ostree kernel arguments"
+      sudo rpm-ostree kargs --append "drm.edid_firmware=HDMI-A-1:edid/dummy-new-2026-latest.bin video=HDMI-A-1:e"
+    else
+      echo "Already enabled"
+    fi

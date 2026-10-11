@@ -61,7 +61,7 @@ dnf makecache
 
 log "Install layered applications"
 LAYERED_PACKAGES=(
-    aria2c
+    aria2
     kcalc
     konsole
     krename
@@ -75,7 +75,6 @@ LAYERED_PACKAGES=(
     thunderbird
     naps2
     lact
-    SDL2_ttf
     heroic-games-launcher-bin
     faugus-launcher
     kodi
@@ -87,11 +86,6 @@ LAYERED_PACKAGES=(
     gh
     qbittorrent
     discord
-    python-elevate
-    python-keyboard
-    python-pyv4l2
-    opencv
-    v4l-utils
     xorg-x11-font-utils
     nss-mdns
     merkuro
@@ -119,3 +113,4 @@ for repo in "${COPR_REPOS[@]}"; do
     dnf5 -y copr disable "$repo"
 done
 rm /etc/yum.repos.d/zerotier.repo -f
+rm -f /etc/yum.repos.d/zerotier.repo /etc/yum.repos.d/gundulabs.repo
