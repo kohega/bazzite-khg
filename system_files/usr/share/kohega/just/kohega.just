@@ -146,3 +146,9 @@ virtual-display:
     else
       echo "Already enabled"
     fi
+
+restore-khg: install-system-flatpaks install-appimages
+    #!/usr/bin/env bash
+    set -euo pipefail
+    command -v chezmoi >/dev/null || brew install chezmoi
+    chezmoi init --apply kohega/dotfiles
