@@ -102,8 +102,8 @@ dnf5 install --setopt=install_weak_deps=False --allowerasing --skip-unavailable 
 
 log "Installing Citrix"
 /ctx/download-icaclient.sh
-rpm -i --nodeps ICAClient-rhel-*.rpm
-rm ICAClient-rhel-*.rpm
+rpm -i --nodeps --nosignature ICAClient-rhel-*.rpm
+rm -f ICAClient-rhel-*.rpm
 
 log "Installing Microsoft fonts"    
 rpm -i --nodigest --nodeps https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
