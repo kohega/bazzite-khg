@@ -211,17 +211,19 @@ setup-sudoers:
 
 # Configure SSH port privately
 setup-ssh:
-   #!/usr/bin/env bash
+    #!/usr/bin/env bash
     set -euo pipefail
 
-    SSH_PORT=$(awk '/^[[:space:]]*Port[[:space:]]+/ {print $2; exit}' ~/.ssh/config)
+    SSH_PORT=$(cat "$HOME/.config/kohega/ssh-port")
 
-    if [[ ! "$SSH_PORT" =~ ^[0-9]+$ ]]; then
-        echo "SSH port not found in ~/.ssh/config"
-        exit 1
+    [[ "$SSH_PORT" =~ ^[0-9]+$ ]] || { echo "Invalid SSH port"; exit 1; }
+
+    if grep -qE '^[#[:space:]]*Port[[:space:]]+' /etc/ssh/sshd_config; then
+        sudo sed -i -E "s/^[#[:space:]]*Port[[:space:]].*/Port $SSH_PORT/" /etc/ssh/sshd_config
+    else
+        echo "Port $SSH_PORT" | sudo tee -a /etc/ssh/sshd_config >/dev/null
     fi
 
-    sudo sed -i -E "s/^[#[:space:]]*Port[[:space:]].*/Port $SSH_PORT/" /etc/ssh/sshd_config
     sudo semanage port -a -t ssh_port_t -p tcp "$SSH_PORT" 2>/dev/null || \
         sudo semanage port -m -t ssh_port_t -p tcp "$SSH_PORT"
 
