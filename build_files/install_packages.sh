@@ -106,7 +106,7 @@ rpm -i --nodeps --nosignature ICAClient-rhel-*.rpm
 rm -f ICAClient-rhel-*.rpm
 
 log "Installing Microsoft fonts"    
-rpm -i --nodigest --nodeps https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+rpm -i --nodigest --nodeps --nosignature https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
 log "Disable COPR repos as we do not need it anymore"
 for repo in "${COPR_REPOS[@]}"; do
